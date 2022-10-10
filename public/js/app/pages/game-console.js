@@ -1303,18 +1303,15 @@ function fightResults() {
         return fightId;
     }
 
-    // $.ajax({
-    //     url: postmanDomain + '/fights/fight-results',
-    //     type: 'post',
-    //     data: {
-    //         _csrfToken: _csrfToken,
-    //         event_id: eventId
-    //     },
-    //     success: success
-    // });
-
-
-    $.getJSON('json/fight-results.json', success);
+    $.ajax({
+        url: postmanDomain + '/fights/fight-results',
+        type: 'post',
+        data: {
+            _csrfToken: _csrfToken,
+            event_id: eventId
+        },
+        success: success
+    });
 
 }
 
