@@ -44,22 +44,22 @@ var mediaServerId = '#mediaServer';
 
 var videoData = [
     {
-        url: 'http://localhost:3000/videos/video-1.mp4',
+        url: 'videos/video-1.mp4',
         winner: 'RED',
         end: '144'
     },
     {
-        url: 'http://localhost:3000/videos/video-2.mp4',
+        url: 'videos/video-2.mp4',
         winner: 'RED',
         end: '199'
     },
     {
-        url: 'http://localhost:3000/videos/video-3.mp4',
+        url: 'videos/video-3.mp4',
         winner: 'BLUE',
         end: '248'
     },
     {
-        url: 'http://localhost:3000/videos/video-4.mp4',
+        url: 'videos/video-4.mp4',
         winner: 'BLUE',
         end: '168'
     }
@@ -211,46 +211,9 @@ function loadDesktopVideo() {
                                 "action":"update-fight-id",
                                 "record":53}
                               }]);
-                            }
-
-                        // console.log(seconds, currentVideoTim)
-                    }
-
-                    
-
-                    // end of betting closed
-                   
+                        }
 
 
-                    // if (Math.round(currentTime) == currentVideoTim.end) {
-                    if (Math.round(currentTime) == 5) {
-
-                        // check and clear player data
-                        // updateWinner({winner: currentVideoTim.winner})
-
-                        //send winner
-                        // $(window).trigger('player-update', [{
-                        // "event":"update-event-14",
-                        // "channel":"CPITDAGASTARPROD-betting-channel",
-                        // "data":{"uid":[25],
-                        //     "action":"update-credit",
-                        //     "winner":"RIGHT"}
-                        // }])
-
-                        // $(window).trigger('citro-update-event', [{
-                        //   "event":"update-event-14",
-                        //   "channel":"CPITDAGASTARPROD-betting-channel",
-                        //   "data":{
-                        //     "fight_id":2778,
-                        //     "fight_no":"178",
-                        //     "fight_status":"ACTIVE",
-                        //     "announcement":"LEFT WINS",
-                        //     "fight_betting_status":"INACTIVE",
-                        //     "entryMeron":"RED",
-                        //     "entryWala":"BLUE",
-                        //     "action":"update-fight-id",
-                        //     "record":53}
-                        //   }]);
                     }
                 });
 
@@ -320,15 +283,89 @@ function loadMobileVideo() {
 
                 // playerMobile.play();
 
-                playerMobile.src(currentVideo.url)
+                playerMobile.src(currentVideoTim.url)
 
                 playerMobile.play();
 
-                playerMobile.on('ended', function() {
+                $(window).trigger('citro-update-event', [{
+                    "event":"update-event-16",
+                    "channel":"CPITDAGASTARPROD-betting-channel",
+                    "data":{
+                        "action":"update-bettingStatus",
+                        "status":"OPEN",
+                        "fight_status":"ACTIVE",
+                        "fight_betting_status":"OPEN",
+                        "record":53,
+                        "announcement":"BETTING IS NOW OPEN"}
+                    }])
 
-                    playerMobile.src(chooseVid().url)
+                playerMobile.on('ended', function() {
+                    setVideo()
+                    // console.log(currentVideoTim)
+                    playerMobile.src(currentVideoTim.url)
                     playerMobile.play();
+
+                    // wait
                 })
+
+                var lastSecond = null;
+                var secondsToCallFunction = 1;
+
+                playerMobile.on('timeupdate', function() {
+                    var currentTime = playerMobile.currentTime()
+
+                    var seconds = Math.floor(currentTime);
+
+                    if (seconds % secondsToCallFunction  == 0 && lastSecond !== seconds) {
+                        lastSecond = seconds
+
+                        if (seconds == 110) {
+                            bettingStatus = 'CLOSED';
+                            $(window).trigger('citro-update-event', [{
+                            "event":"update-event-16",
+                            "channel":"CPITDAGASTARPROD-betting-channel",
+                            "data":{"action":"update-bettingStatus",
+                                "status":"CLOSED",
+                                "fight_status":"ACTIVE",
+                                "fight_betting_status":"CLOSED",
+                                "record":53,
+                                "announcement":"BETTING IS NOW CLOSED"}
+                            }])
+                            // Update the betting status
+                        }
+
+                        if (seconds == currentVideoTim.end) {
+                            updateWinner({winner: currentVideoTim.winner})
+                        }
+
+                        if (seconds == currentVideoTim.end) {
+                            $(window).trigger('player-update', [{
+                            "event":"update-event-14",
+                            "channel":"CPITDAGASTARPROD-betting-channel",
+                            "data":{"uid":[25],
+                                "action":"update-credit",
+                                "winner":"RIGHT"}
+                            }])
+
+                            $(window).trigger('citro-update-event', [{
+                              "event":"update-event-14",
+                              "channel":"CPITDAGASTARPROD-betting-channel",
+                              "data":{
+                                "fight_id":2778,
+                                "fight_no":"1",
+                                "fight_status":"ACTIVE",
+                                "announcement":"LEFT WINS",
+                                "fight_betting_status":"INACTIVE",
+                                "entryMeron":"RED",
+                                "entryWala":"BLUE",
+                                "action":"update-fight-id",
+                                "record":53}
+                              }]);
+                        }
+
+                        
+                    }
+                });
 
             });
         }
