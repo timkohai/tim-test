@@ -1,18 +1,19 @@
 {
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "google-auth-library": ">=5.9.2",
-    "jsonwebtoken": ">=8.5.1"
-  },
   "name": "dagal",
   "description": "This project contains sample code used for the [Google Wallet Codelab](https://codelabs.developers.google.com/save-to-wallet-web).",
   "version": "1.0.0",
   "main": "app.js",
-  "devDependencies": {},
   "scripts": {
     "start": "node app.js"
   },
+  "engines": {
+    "node" : "14.x"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/timkohai/tim-bet-on.git"
@@ -24,3 +25,6 @@
   },
   "homepage": "https://github.com/timkohai/tim-bet-on#readme"
 }
+
+
+
