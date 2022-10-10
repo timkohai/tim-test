@@ -213,7 +213,7 @@ function loadDesktopVideo() {
                               }]);
                             }
 
-                        console.log(seconds, currentVideoTim)
+                        // console.log(seconds, currentVideoTim)
                     }
 
                     
