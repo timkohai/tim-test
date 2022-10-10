@@ -1156,8 +1156,8 @@ function clearBettingTable() {
 function fightResults() {
 
     var success = function(result) {
-        // var obj = jQuery.parseJSON(result);
-        var obj = result
+        var obj = jQuery.parseJSON(result);
+        // var obj = result
 
         if (obj.result == 'OK') {
             var bacarat = obj.bacarat;

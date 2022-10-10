@@ -117,10 +117,20 @@ var mockData = {
       "type": null,
 
       "bacarat": [
-          []
+          [{
+              "badge": "badge-fight-cancel",
+              "no": "1",
+              "side": "CANCEL",
+              "border": ""
+          }]
       ],
       "default_data": [
-          []
+          [{
+              "badge": "badge-secondary",
+              "no": "1",
+              "side": "CANCEL",
+              "border": ""
+          }]
       ],
       "max_col": 10,
       "max_col_b": 18,
