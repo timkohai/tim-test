@@ -1,58 +1,725 @@
-<!--
+<!DOCTYPE html>
+<html class="dark-mode">
 
-Copyright 2022 Google Inc. All rights reserved.
-
-
-Licensed under the Apache License, Version 2.0 (the "License"); you may not
-use this file except in compliance with the License. You may obtain a copy of
-the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-License for the specific language governing permissions and limitations under
-the License.
-
--->
-<html>
-<title>Google Wallet Codelab</title>
 <head>
-<script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="PENTAGOL is operating and offering internet gambling services including, but not limited to, casino, poker, sports betting and other gaming services.">
+    <title>
+        DEMO APP | ONLINE BETTING PLATFORM: Game Console </title>
+    <link href="http://app.dagastar.com/img/favicon/favicon-32x32.png" type="image/x-icon" rel="icon" />
+    <link href="http://app.dagastar.com/img/favicon/favicon-32x32.png" type="image/x-icon" rel="shortcut icon" />
+    <link href="http://app.dagastar.com/img/favicon/apple-touch-icon.png" type="image/x-icon" rel="icon" />
+    <link href="http://app.dagastar.com/img/favicon/apple-touch-icon.png" type="image/x-icon" rel="shortcut icon" />
+    <link href="http://app.dagastar.com/img/favicon/android-chrome-512x512.png" sizes="512x512" type="image/x-icon" rel="icon" />
+    <link href="http://app.dagastar.com/img/favicon/android-chrome-512x512.png" sizes="512x512" type="image/x-icon" rel="shortcut icon" />
+    <link href="http://app.dagastar.com/img/favicon/android-chrome-192x192.png" sizes="192x192" type="image/x-icon" rel="icon" />
+    <link href="http://app.dagastar.com/img/favicon/android-chrome-192x192.png" sizes="192x192" type="image/x-icon" rel="shortcut icon" />
 
-window.addEventListener('load', () => {
-  document.getElementById('form').addEventListener('submit', e => {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    fetch(`/`, {
-      method: 'POST', 
-      body: `email=${email}`,
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-    }).then(res => {
-      return res.text();
-    }).then(button => {
-      document.getElementById('button').innerHTML = button;
-    });
-  });
-});
+    <meta name="theme-color" content="#006f05">
+<!--     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+    <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
+    <!-- Google fonts-->
+<!--     <link rel="preconnect" href="https://fonts.googleapis.com/"> -->
+<!--     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet"> -->
+<!--     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet"> -->
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <link rel="stylesheet" href="font/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="assets/vendor/swiperjs-6.6.2/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="js/plugins/toastr/toastr.css" />
+    <link rel="stylesheet" href="assets/css/custom.css?v=1" />
+    <link rel="stylesheet" href="js/plugins/dataTable/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="js/plugins/videoJS/7.17.0/video-js.css" />
+    <link rel="stylesheet" href="assets/css/slasher.css?v=1" />
+    <style type="text/css">
+        .ratio {
+            position: relative;
+            width: 100%;
+        }
 
-</script>
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700%7CGoogle+Sans:400,500%7CGoogle+Sans+Text:400,700%7CProduct+Sans:400" />
-<link rel="stylesheet" href="style.css" />
+        .ratio::before {
+            display: block;
+            padding-top: var(--bs-aspect-ratio);
+            content: "";
+        }
+
+        .ratio>* {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+    <script>
+        var postmanDomain = ""
+    </script>
+    <script>
+        // var pusherDomain = "CPITDAGASTARPROD";
+        // var pusherKey = "fd8f43e07caa70ca4a37";
+        // var pusherCluster = "ap3";
+        // var pusher = new Pusher(pusherKey, {
+        //     cluster: pusherCluster,
+        //     forceTLS: true
+        // });
+    </script>
+    <script>
+        // var rtmp = 'https://live.cockpitgaming.io/citroftest01/citrofstream02-manifest.m3u8';
+        // var rtmp = 'http://localhost:3000/videos/v1/index.m3u8';
+        var rtmp = 'videos/video-1.mp4';
+        var leftSide = 'Red';
+        var rightSide = 'Blue';
+        var eventType = 'slasher';
+
+        var currentVideoTim = {
+            url: 'videos/video-1.mp4',
+            winner: 'RED',
+            end: '144'
+        }
+
+    </script>
 </head>
 
-<body>
+<body class="body-scroll theme-cs theme">
+    <!-- loader section -->
+    <!-- <div class="container-fluid loader-wrap">
+        <div class="row h-100">
+            <div class="col-10 col-md-6 col-lg-5 col-xl-3 mx-auto text-center align-self-center">
+                <div class="loader-cube-wrap loader-cube-animate mx-auto">
+                    <img src="/img/loader-logo.png" alt="Logo">
+                </div>
+                <p class="mt-4">It's time for some fun<br><strong>Please wait...</strong></p>
+            </div>
+        </div>
+    </div> -->
+    <!-- loader section ends -->
+    <form method="post" accept-charset="utf-8" class="d-none" action="/pages/game-console/12">
+        <div style="display:none;"><input type="hidden" name="_csrfToken" autocomplete="off" value="eXwtWtDAv+kTqJjSn/kbUwlAX2xy2/IrTxExSr4nmLvd28cU4FJdjiOs7hqkGzV+gEVQ84EjaPGy7P5L9XJpnYJ0c2ZCKDJgOiRvWUvqkxh3cFcpjhT5g+q/9i3UZWXvRpzWKsYuAxywcTOSuBIJyA==" /></div> <input type="hidden"
+            id="player-id" value="85">
+        <input type="hidden" id="hidden-name" value="Tim Madriaga">
+        <input type="hidden" id="hidden-email" value="devtimee@gmail.com">
+    </form>
 
-<div id="content">
-<img id="pass" src="sample-pass.png">
-<form id="form">
-  <p>Enter your email address to generate a new pass:</p>
-  <input required type="email" id="email" placeholder="Email">
-  <input type="submit" value="Create pass" id="submit">
-  <div id="button"></div>
-</form>
-</div>
+    <!-- Sidebar main menu -->
+    <div class="sidebar-wrap  sidebar-pushcontent" style="display: none;">
+        <!-- Add overlay or fullmenu instead overlay -->
+        <div class="closemenu text-muted">Close Menu</div>
+        <div class="sidebar ">
+            <!-- user information -->
+            <div class="row my-3">
+                <div class="col-12 ">
+                    <div class="card shadow-sm bg-opac text-white border-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-auto px-1">
+                                    <figure class="avatar avatar-44 rounded-15">
+                                        <img src="http://app.dagastar.com/img/logo_orange.png" style="width:48px;">
+                                    </figure>
+                                </div>
+                                <div class="col px-0 align-self-center">
+                                    <p class="mb-1 notranslate">dagaL5p21</p>
+                                    <p class="text-muted size-12 notranslate">Tim Madriaga</p>
+                                </div>
+                                <div class="col-auto">
+                                    <button class="btn btn-40 btn-light menu-btn">
+                                        <i class="bi bi-x"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card bg-opac text-white border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="text-muted notranslate">PTS</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <h1 class="display-6 player-credits"></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- user emnu navigation -->
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/pages/home">
+                                <div class="avatar avatar-40 rounded icon"><i class="bi bi-house-door"></i></div>
+                                <div class="col">Home</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/players/profile" tabindex="-1">
+                                <div class="avatar avatar-40 rounded icon"><i class="bi bi-person"></i></div>
+                                <div class="col">Account</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/bets" tabindex="-1">
+                                <div class="avatar avatar-40 rounded icon"><i class="bi bi-list-ol"></i></div>
+                                <div class="col">Bet History</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/transactions" tabindex="-1">
+                                <div class="avatar avatar-40 rounded icon"><i class="bi bi-file-earmark-text"></i></div>
+                                <div class="col">Transaction History</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/loadings" tabindex="-1">
+                                <div class="avatar avatar-40 rounded icon"><i class="bi bi-clipboard-check"></i></div>
+                                <div class="col">Cash In</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="/withdrawals" tabindex="-1">
+                                <div class="avatar avatar-40 rounded icon"><i class="bi bi-clipboard-check"></i></div>
+                                <div class="col">Cash Out</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                        <a class="nav-link" href="https://web.whatsapp.com/send?phone=51992690549" tabindex="-1" target="_BLANK">
+                            <div class="avatar avatar-40 rounded icon"><i class="bi bi-whatsapp"></i></div>
+                            <div class="col">Chat Support</div>
+                            <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                        </a>
+                    </li> -->
+                        <!-- <li class="nav-item">
+                        <a class="nav-link" href="/pages/terms-of-use" tabindex="-1">
+                            <div class="avatar avatar-40 rounded icon"><i class="bi bi-newspaper"></i></div>
+                            <div class="col">Terms of Use</div>
+                            <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                        </a>
+                    </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout" tabindex="-1">
+                                <div class="avatar avatar-40 rounded icon"><i class="bi bi-box-arrow-right"></i></div>
+                                <div class="col">Logout</div>
+                                <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="py-3">
+                        <p class="font-12 lh-1">Agent Contact Information</p>
+                        <p class="font-12 lh-1">Email: jt@cockpitgaming.io</p>
+                        <p class="font-12 lh-1">Mobile: </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sidebar main menu ends -->
+    <!-- Begin page -->
+    <main class="h-100">
+        <input type="hidden" id="event-id" value="12">
+        <input type="hidden" id="player-id" value="85">
+        <!-- Header -->
+        <header class="header position-fixed" style="background-color: #000;">
+            <div class="row">
+                <div class="col">
+                    <a href="javascript:void(0)" target="_self" class="btn btn-light btn-44 menu-btn" style="display: none;">
+                        <i class="bi bi-list"></i>
+                    </a>&nbsp;
+                    <img src="http://app.dagastar.com/img/logo_white.png" class="img-fluid" style="width:44px;" alt="" /> </div>
+                <div class="col-auto text-white text-right px-0">
+                    <div class="player-credits-game text-white" id="credits">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <a href="javascript:;" class="btn btn-light btn-44 " id="reload" onclick="reloadGameConsole();">
+                        <ion-icon name="reload-outline"></ion-icon>
+                    </a>
+                </div>
+            </div>
+            <div class="row mt-2 d-sm-none d-md-none d-lg-none">
+                <!-- id="mobileVideo" -->
+                <div class="col p-0">
+                    <!-- <div class="card-header border-0 pb-0">
+                <div class="row event-name">
+                    <h6 class="mb-1 text-center pt-1 pb-1 notranslate"></h6>
+                    <p class="marquee bannerMessage" id="bannerMessage">Good Day</p>
+                </div>    
+            </div> -->
+                    <div class="card-body m-0 p-0">
+                        <!-- <div class="row">
+                    <div class="col"> -->
+                        <div class="ratio ratio-16x9" id="mediaBox">
+                            <video id="mediaServerMobile" preload="auto" style="text-align:center;display:block;" class="video-js vjs-default-skin vjs-big-play-centered vjs-nofull embed-responsive-item" autoplay muted  data-setup='{"controlBar": {"pictureInPictureToggle": false }, "userActions": {"doubleClick": false } }'
+                                playsinline x-webkit-airplay="deny" webkit-playsinline></video>
+                        </div>
+                        <!-- </div> "fullscreenToggle": false
+                </div> -->
+                        <p id="video-message" class="text-center text-white d-none" style="margin:10px"></p>
+                    </div>
+                    <div class="card-footer border-0 p-0">
+                        <div class="row m-0">
+                            <div class="col shadowed text-center lh-1 py-2 text-white font-14 marquee bannerMessage">
+                                ---
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header ends -->
+        <!-- main page content -->
+        <div class="main-container" style="background-image: linear-gradient(175deg, #000416, #020c38);">
+            <div class="" id="gameContainer">
+                <div class="row m-0">
+                    <div class="col-lg-7 col-md-7 col-sm-6 p-0" id="mediaContainer">
+                        <div class="card d-none d-sm-block d-md-block d-lg-block">
+                            <!-- id="desktopVideo" -->
+                            <div class="card-header border-0 pb-0 event-name">
+                                <div class="row">
+                                    <h6 class="mb-1 text-center notranslate">Cockfighting Events</h6>
+                                    <p class="marquee bannerMessage" id="bannerMessage">Good Day</p>
+                                </div>
+                            </div>
+                            <div class="card-body m-0 p-0">
+                                <!-- <div class="row">
+                            <div class="col"> -->
+                                <div class="ratio ratio-16x9" id="mediaBox">
+                                    <video id="mediaServer" preload="auto" style="text-align:center;display:block;" class="video-js vjs-default-skin vjs-big-play-centered vjs-nofull embed-responsive-item" autoplay muted data-setup='{"controlBar": {"pictureInPictureToggle": false}, "userActions": {"doubleClick": false } }'
+                                        playsinline x-webkit-airplay="deny" webkit-playsinline></video>
+                                </div>
+                                <!-- </div> , "fullscreenToggle": false
+                        </div> -->
+                                <p id="video-message" class="text-center text-white d-none" style="margin:10px"></p>
+                            </div>
+                            <div class="card-footer border-0 p-0">
+                                <div class="row m-0">
+                                    <div class="col entry-names font-18 ls-1 left-entry-div" id="leftEntryDiv">
+                                        <span class="m-0 leftEntryName" id="leftEntryName">Red</span>
+                                    </div>
+                                    <div class="col entry-names font-18 ls-1 right-entry-div" id="rightEntryDiv">
+                                        <span class="m-0 rightEntryName" id="rightEntryName">Blue</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col pt-10 pl-0 pr-0 " id="desktop-thread">
+                            <div class="card bg-light-gray">
+                                <div class="card-body p-1">
+                                    <!-- tabs structure -->
+                                    <ul class="nav nav-pills nav-justified tabs mb-3" id="assetstabs" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active fightResultTabA" id="home-tab" data-bs-toggle="tab" data-bs-target="#fightResultsA" type="button" role="tab" aria-controls="fightResultsA" aria-selected="true">BACCARAT</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link fightResultTabB" id="currency-tab" data-bs-toggle="tab" data-bs-target="#fightResultsB" type="button" role="tab" aria-controls="fightResultsB" aria-selected="false">STANDARD</button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content fightResults table-responsive" id="assetstabsContent">
+                                        <div class="tab-pane fade show active " id="fightResultsA" role="tabpanel">
+                                        </div>
+                                        <div class="tab-pane fade" id="fightResultsB" role="tabpanel" aria-labelledby="currency-tab">
+                                        </div>
+                                    </div>
+                                    <!-- <ul class="nav nav-tabs style1" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active fightResultTabA" data-toggle="tab" href="#fightResultsA" role="tab">
+                                        BACCARAT
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fightResultTabB" data-toggle="tab" href="#fightResultsB" role="tab">
+                                        STANDARD
+                                    </a>
+                                </li>
+                            </ul>
+                                
+                            <div class="tab-content table-responsive mt-2 fightResults">
+                                <div class="tab-pane fade show active" id="fightResultsA" role="tabpanel">
+                                </div>
+                                <div class="tab-pane fade" id="fightResultsB" role="tabpanel">
+                                </div>
+                            </div> -->
+                                    <div class="row">
+                                        <div class="col table-responsive">
+                                            <table class="table baccarat-legend">
+                                                <tr>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-bacarrat-left shadow left-legend badge-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-bacarrat-right shadow right-legend badge-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-fight-cancel shadow cancel-legend badge-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-fight-draw shadow draw-legend badge-legend"> </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Red</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Blue</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Cancel</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Draw</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table class="table d-none standard-legend">
+                                                <tr>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-left badge-fight shadow left-legend badge-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-right badge-fight shadow right-legend badge-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-secondary badge-fight shadow cancel-legend badge-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-success badge-fight shadow draw-legend badge-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <button class="btn btn-warning square shadowed"></button>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <button class="btn btn-outline-light square shadowed"></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Red</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Blue</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Cancel</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Draw</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Llamado</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Dehado</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-6 mt-0" id="rightCol">
+                        <div class="row mx-0 mb-3">
+                            <div class="col pr-0 pl-0">
+                                <div class="event-info col w-100 shadowed text-center text-white ls-02 bettingStatusText">
+                                    ---
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-2 mx-0">
+                            <div class="col betting-table">
+                                <div class="row pb-10">
+                                    <div class="col right-border ">
+                                        <label class="text-uppercase fw-bolder font-14">TOTAL BETS ON <span class="text-side-left">Red</span></label>
+                                        <p class="side-value my-1 text-end" id="meronAmount">0.00</p>
+                                        <label class="text-uppercase fw-bolder font-14">PAYOUT RATE</label>
+                                        <p class="side-value my-1 text-end" id="meronOdds">0.00</p>
+                                        <button class="btn btn-block btn-left border-2 shadowed mt-2 side-select" data-side="LEFT">
+                                            <i class="fas fa-coins float-left"></i> BET ON Red </button>
+                                    </div>
+                                    <div class="col">
+                                        <label class="text-uppercase fw-bolder font-14">TOTAL BETS ON <span class="text-side-right">Blue</span></label>
+                                        <p class="side-value my-1 text-end" id="walaAmount">0.00</p>
+                                        <label class="text-uppercase fw-bolder font-14">PAYOUT RATE</label>
+                                        <p class="side-value my-1 text-end" id="walaOdds">0.00</p>
+                                        <button class="btn btn-block btn-right border-2 shadowed mt-2 side-select" data-side="RIGHT">
+                                            <i class="fas fa-coins"></i> <span class="text-end">BET ON Blue</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col py-0 py-2">
+                            <div class="card-bet-header">
+                                <h6>YOUR BETS </h6>
+                            </div>
+                            <div class="card-bh">
+                                <div class="table-responsive mt-1" id="activeBets">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col py-2 px-0 col-sm-block d-none  " id="mobile-thread">
+                            <div class="card">
+                                <div class="card-body p-1">
+                                    <!-- tabs structure -->
+                                    <ul class="nav nav-pills nav-justified tabs mb-3" id="assetstabs" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active fightResultTabA" id="home-tab" data-bs-toggle="tab" data-bs-target="#fightResultsAMobile" type="button" role="tab" aria-controls="fightResultsAMobile" aria-selected="true">BACCARAT</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link fightResultTabB" id="currency-tab" data-bs-toggle="tab" data-bs-target="#fightResultsBMobile" type="button" role="tab" aria-controls="fightResultsBMobile" aria-selected="false">STANDARD</button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content fightResults table-responsive" id="assetstabsContent">
+                                        <div class="tab-pane fade show active " id="fightResultsAMobile" role="tabpanel">
+                                        </div>
+                                        <div class="tab-pane fade" id="fightResultsBMobile" role="tabpanel" aria-labelledby="currency-tab">
+                                        </div>
+                                    </div>
+                                    <!-- <ul class="nav nav-tabs style1" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active fightResultTabA" data-toggle="tab" href="#fightResultsAMobile" role="tab" >
+                                            BACCARAT
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link fightResultTabB" data-toggle="tab" href="#fightResultsBMobile" role="tab">
+                                            STANDARD
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content table-responsive mt-2 fightResults">
+                                    <div class="tab-pane fade show active" id="fightResultsAMobile" role="tabpanel">
+                                    </div>
+                                    <div class="tab-pane fade" id="fightResultsBMobile" role="tabpanel">
+                                    </div>
+                                </div> -->
+                                    <div class="row">
+                                        <div class="col table-responsive">
+                                            <table class="table baccarat-legend">
+                                                <tr>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-bacarrat-left shadow left-legend badge-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-bacarrat-right shadow right-legend badge-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-fight-cancel shadow cancel-legend badge-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-fight-draw shadow draw-legend badge-legend"> </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Red</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Blue</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Cancel</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Draw</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table class="table d-none standard-legend">
+                                                <tr>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-left badge-fight shadow left-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-right badge-fight shadow right-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-secondary badge-fight shadow cancel-legend badge-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <span class="badge badge-success badge-fight shadow draw-legend badge-legend"> </span>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <button class="btn btn-warning square shadowed"></button>
+                                                    </td>
+                                                    <td class="text-center border-0 pb-0 pl-1 pr-1">
+                                                        <button class="btn btn-outline-light square shadowed"></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Red</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Blue</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Cancel</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Draw</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Llamado</p>
+                                                    </td>
+                                                    <td class="text-center border-0 p-0 pl-1 pr-1">
+                                                        <p>Dehado</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col pt-10 pb-10 pr-0 pl-0">
+                            <div class="card bg-light-gray">
+                                <div class="card-header">
+                                    <h6 class="my-1"><i class="bi bi-clock-history"></i> &nbsp; BET HISTORY </h6>
+                                </div>
+                                <div class="card-body bg-light" id="betHistory">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- * main page -->
+        <!-- Default Action Sheet -->
+        <div class="modal fade action-sheet" id="actionSheet" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" id="modal-chips-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="cat-name">PLACE BET ON <span id="titleSide"></span></h3>
+                        <button type="button" class="btn btn-default" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+                    </div>
+                    <div class="modal-body ">
+                        <div class="action-sheet-content text-center pt-1">
+                            <div class="row pb-1">
+                                <div class="col d-grid">
+                                    <button class="btn btn-left btn-lg btn-amount btn-all fw-bolder shadowed" data-amount="all">
+                                        All In
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="pt-10 pb-10 ">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="http://app.dagastar.com/img/chips/cockxing/1_right.png" class="img-fluid btn-amount" data-amount="1" alt="" /> </div>
+                                    <div class="col-4">
+                                        <img src="http://app.dagastar.com/img/chips/cockxing/5_right.png" class="img-fluid btn-amount" data-amount="5" alt="" /> </div>
+                                    <div class="col-4">
+                                        <img src="http://app.dagastar.com/img/chips/cockxing/20_right.png" class="img-fluid btn-amount" data-amount="20" alt="" /> </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="http://app.dagastar.com/img/chips/cockxing/50_right.png" class="img-fluid btn-amount" data-amount="50" alt="" /> </div>
+                                    <div class="col-4">
+                                        <img src="http://app.dagastar.com/img/chips/cockxing/100_right.png" class="img-fluid btn-amount" data-amount="100" alt="" /> </div>
+                                </div>
+                            </div>
+                            <div class="divider bg-primary mt-1 mb-2"></div>
+                            <div class="row">
+                                <div class="col-3 d-grid">
+                                    <button class="btn btn-left btn-lg shadowed fw-bolder btn-bet" id="clearBtn">
+                                        Clear
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <input type="number" class="form-control form-control-lg" id="amountInput" value="0" step=".01">
+                                </div>
+                                <div class="col-3 d-grid">
+                                    <button class="btn btn-left btn-lg shadowed fw-bolder btn-bet" id="betBtn">
+                                        Bet
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- * Default Action Sheet -->
+        <div class="modal fade dialogbox " id="betConfirm" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" id="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Bet Confirmation</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col mt-4 text-center" id="betMessage"></div>
+                        </div>
+                        <div class="divider mt-5 mb-3"></div>
+                        <div class="row">
+                            <div class="col-3 d-grid">
+                                <button id="cancelBetBtn" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                            </div>
+                            <div class="col-6 d-grid"></div>
+                            <div class="col-3 d-grid">
+                                <button id="confirmBetBtn" class="btn btn-white" data-bs-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="mock/data.js"></script>
+    <!-- Page ends-->
+    <div id="google_translate_element" style="display: none;"></div>
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/vendor/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.cookie.js"></script>
+    
+    <script src="assets/js/main.js"></script>
+    
+    <script src="assets/js/color-scheme.js"></script>
+    <script src="assets/vendor/progressbar-js/progressbar.min.js"></script>
+    <script src="assets/vendor/swiperjs-6.6.2/swiper-bundle.min.js"></script>
+    
+    <script src="assets/js/app.js"></script>
 
+    <script src="js/lib/jquery.validate.min.js"></script>
+    <script src="js/plugins/metro/general/moment/min/moment.min.js"></script>
+    <script src="js/plugins/metro/general/moment/min/moment-timezone-with-data.js"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="js/plugins/toastr/toastr.min.js"></script>
+
+    <script src="js/app.js"></script>
+    
+    <script src="js/lib/simple.money.format.js"></script>
+    <script src="js/plugins/jplayer/jquery.jplayer.js"></script>
+    <script src="js/plugins/jquery.marquee.min.js"></script>
+    <script src="js/app/pages/jquery.confetti.js"></script>
+    <script src="js/plugins/dataTable/jquery.dataTables.min.js"></script>
+    <script src="js/plugins/dataTable/dataTables.bootstrap5.min.js"></script>
+    <script src="js/plugins/videoJS/7.17.0/video.min.js"></script>
+    <!-- <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/videojs-resolution-switcher-vjs7@1.0.0/videojs-resolution-switcher.js"></script>
+    <script src="js/app/pages/game-console.js?vs=3"></script>
+    <script src="js/app/pages/pusher.js"></script>
 </body>
+
 </html>

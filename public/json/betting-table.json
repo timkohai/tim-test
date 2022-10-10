@@ -1,0 +1,12 @@
+{
+    "action": "update-bettingTable",
+    "betting_status": "OPEN",
+    "camera_side": "",
+    "meron_odds": "0",
+    "wala_odds": "0",
+    "meron_amount": 0,
+    "wala_amount": 0,
+    "player_meron_amount": 0,
+    "player_wala_amount": 0,
+    "result": "OK"
+}

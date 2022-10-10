@@ -1,0 +1,65 @@
+<div class="table-responsive mt-1">
+    <table class="table" id="betHistoryDT">
+        <thead>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="pl-1 pr-1 text-center">
+                    <span class="badge badge-left badge-result">93</span>
+                </td>
+                <td class="pl-1 pr-1 text-center">
+                    <p><b><span class="text-side-left ls-02 btn-light btn-sm">RED</span></b></p>
+                    <p class="text-success"><b><i class="text-success bi bi-check-circle-fill"></i> WIN 1.86</b></p>
+                </td>
+                <td class="pl-1 pr-1 text-end">
+                    <p class="-ls-02 font-15"><b>5.00</b></p>
+                    <p class="- ls-02   font-15"><b>9.30 </b></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="pl-1 pr-1 text-center">
+                    <span class="badge badge-right badge-result">105</span>
+                </td>
+                <td class="pl-1 pr-1 text-center">
+                    <p><b><span class="text-side-left ls-02 btn-light btn-sm">RED</span></b></p>
+                    <p class="text-danger"><b><i class="text-danger bi bi-x-circle-fill"></i> LOSE </b></p>
+                </td>
+                <td class="pl-1 pr-1 text-end">
+                    <p class="-ls-02 font-15"><b>5.00</b></p>
+                    <p class="- ls-02   font-15"><b>0.00 </b></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="pl-1 pr-1 text-center">
+                    <span class="badge badge-right badge-result">124</span>
+                </td>
+                <td class="pl-1 pr-1 text-center">
+                    <p><b><span class="text-side-left ls-02 btn-light btn-sm">RED</span></b></p>
+                    <p class="text-danger"><b><i class="text-danger bi bi-x-circle-fill"></i> LOSE </b></p>
+                </td>
+                <td class="pl-1 pr-1 text-end">
+                    <p class="-ls-02 font-15"><b>5.00</b></p>
+                    <p class="- ls-02   font-15"><b>0.00 </b></p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $('#betHistoryDT').DataTable( {
+        retrieve: true,
+        "order": [[ 0, "desc" ]],
+        "drawCallback": function() {
+            $(this.api().table().header()).hide();
+        }
+    } );
+</script>
+
+
+

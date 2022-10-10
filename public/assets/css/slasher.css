@@ -1,0 +1,161 @@
+.theme {
+    --left-color: #FFF;
+    --left-bg: #df1e21;
+    --left-dark-bg: #b11a1c;
+    --left-border: #931617;
+    --left-outline: #000;
+    --right-color: #FFF;
+    --right-bg: #452fe9;
+    --right-dark-bg: #3623bf;
+    --right-border: #301fa9;
+    --right-outline: #000;
+}
+
+.mobile-left-entry-div {
+    background: var(--left-bg);
+    padding: .25rem;
+    color: var(--left-color);
+}
+
+.mobile-right-entry-div {
+    background: var(--right-bg);
+    padding: .25rem;
+    color: var(--right-color);
+}
+
+.left-entry-div {
+    background: var(--left-bg);
+    padding: .25rem;
+    color: var(--left-color);
+    border-bottom-left-radius: 15px;
+}
+
+.right-entry-div {
+    background: var(--right-bg);
+    padding: .25rem;
+    color: var(--right-color);
+    border-bottom-right-radius: 15px;
+}
+
+.btn-left {
+    background-color: var(--left-bg);
+    border: var(--left-dark-bg) 2px solid !important;
+    color: var(--left-color) !important;
+}
+
+.btn-right {
+    background-color: var(--right-bg);
+    border: var(--right-dark-bg) 2px solid !important;
+    color: var(--left-color) !important;
+}
+
+.bg-left {
+    background-color: var(--left-bg) !important;
+    color: var(--left-color);
+}
+
+.bg-right {
+    background-color: var(--right-bg) !important;
+    color: var(--right-color);
+}
+
+.badge-left {
+    background: var(--left-bg);
+    color: var(--left-color);
+    width: 45px !important;
+    height: 45px !important;
+    padding: 1em 0.65em;
+}
+
+.badge-right {
+    background: var(--right-bg);
+    color: var(--right-color);
+    width: 45px !important;
+    height: 45px !important;
+    padding: 1em 0.65em;
+}
+
+.badge-fight-left {
+    width: 30px !important;
+    height: 30px !important;
+    border: var(--left-bg) 6px solid;
+    font-weight: 500;
+}
+
+.badge-fight-right {
+    width: 30px !important;
+    height: 30px !important;
+    border: var(--right-bg) 6px solid;
+    font-weight: 500;
+}
+
+.badge-bacarrat-left {
+    width: 45px !important;
+    height: 45px !important;
+    border: var(--left-bg) 6px solid;
+    font-weight: 500;
+}
+
+.badge-bacarrat-right {
+    width: 45px !important;
+    height: 45px !important;
+    border: var(--right-bg) 6px solid;
+    font-weight: 500;
+}
+
+.badge-standard-left,
+a.badge-standard-left {
+    background: var(--left-bg) !important;
+}
+
+.badge-standard-right,
+a.badge-standard-right {
+    background: var(--left-bg) !important;
+}
+
+.text-side-left {
+    color: var(--left-bg) !important;
+}
+
+.text-side-right {
+    color: var(--right-bg) !important;
+}
+
+.border-left {
+    border-color: var(--left-border) !important;
+}
+
+.border-right {
+    border-color: var(--right-border) !important;
+}
+
+.bg-left {
+    background-color: var(--left-bg) !important;
+    color: var(--left-color);
+}
+
+.bg-right {
+    background-color: var(--right-bg) !important;
+    color: var(--right-color);
+}
+
+.side-value {
+    background: #222222;
+    font-size: 16px !important;
+    font-weight: 700;
+    padding: .30rem .55rem !important;
+    height: auto;
+    border-radius: 5px;
+}
+
+.left-wrapper {
+    border: #161515 2px solid !important;
+    background-color: #121212 !important;
+    color: #fff;
+}
+
+.right-wrapper {
+    border: #161515 2px solid !important;
+    background-color: #121212 !important;
+    color: #fff;
+}
