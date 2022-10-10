@@ -220,7 +220,6 @@ var calculate = {
 
 app.post("/players/player-data", function (request, response) {
   // const data = require('./public/api/player-data.js');
-  // response.status(200).json(data)
 
   response.send(JSON.stringify(mockData.playerData));
 });
@@ -236,15 +235,10 @@ app.post("/fights/fight-results", function (request, response) {
 });
 
 app.post("/bets/betting-table", function (request, response) {
-  
-  const data = require('./public/api/betting-table.js');
   response.send(JSON.stringify(mockData.bettingTable));
-
-
 });
 
 app.post("/bets/active-bets", function (request, response) {
-  // response.sendFile(__dirname + "/public/api/active-bets.html");
   response.send(getActiveBets());
 });
 
@@ -281,8 +275,7 @@ app.post("/bets/add", function (request, response) {
 });
 
 app.post("/events/data", function (request, response) {
-  const data = require('./public/api/events-data.js');
-  response.send(JSON.stringify(data));
+  response.send(JSON.stringify(mockData.eventsData));
 });
 
 

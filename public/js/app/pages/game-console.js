@@ -661,7 +661,7 @@ function getPlayerData() {
         }
     }
     $.ajax({
-        url: '/players/player-data',
+        url:  postmanDomain + '/players/player-data',
         type: 'post',
         data: {
             _csrfToken: _csrfToken
