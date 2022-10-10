@@ -23,7 +23,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.post('/');
-app.listen(3000);
+app.listen(8080);
 
 
 var mockData = {
@@ -219,7 +219,7 @@ var calculate = {
 }
 
 app.post("/players/player-data", function (request, response) {
-  const data = require('./public/api/player-data.js');
+  // const data = require('./public/api/player-data.js');
   // response.status(200).json(data)
 
   response.send(JSON.stringify(mockData.playerData));
