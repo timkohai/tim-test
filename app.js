@@ -288,7 +288,6 @@ var updateBacarat = function(winner) {
   var cancel = mockData.fightResult.cancel
 
   
-
   var win = winner == 'RED' ? 'LEFT' : 'RIGHT'
   lastWinning = win
 
