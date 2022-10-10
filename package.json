@@ -7,7 +7,7 @@
     "start": "node app.js"
   },
   "engines": {
-    "node" : "14.x"
+    "node" : "v16.4.0"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -25,3 +25,5 @@
   },
   "homepage": "https://github.com/timkohai/tim-bet-on#readme"
 }
+
+
