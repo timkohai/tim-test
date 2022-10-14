@@ -16,6 +16,7 @@
 
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -153,6 +154,7 @@ var mockData = {
   }
 }
 
+var oldActiveBets = []
 var activeBets = []
 
 var getActiveBets = function(content) {
@@ -230,8 +232,9 @@ app.post("/fights/data", function (request, response) {
 });
 
 app.post("/fights/fight-results", function (request, response) {
-  // const data = require('./public/api/fight-results.js');
-  response.send(JSON.stringify(mockData.fightResult));
+  const data = require('./public/api/fight-results.js');
+  // response.send(JSON.stringify(mockData.fightResult));
+  response.send(JSON.stringify(updateBacarat()));
 });
 
 app.post("/bets/betting-table", function (request, response) {
@@ -248,7 +251,7 @@ app.post("/bets/bet-history", function (request, response) {
 });
 
 app.post("/bets/add", function (request, response) {
-  console.log('request /bets/add', request.body)
+  // console.log('request /bets/add', request.body)
 
   var success = {
     "result":"OK",
@@ -265,6 +268,7 @@ app.post("/bets/add", function (request, response) {
   var data = request.body.betting_status == 'OPEN' ? success : failed
 
   if (request.body.betting_status == 'OPEN') {
+
     activeBets.push(request.body)
     calculate.debitPlayer(request.body.amount)
     updateBettingTable()
@@ -287,25 +291,60 @@ var updateBacarat = function(winner) {
   var wala = mockData.fightResult.wala
   var cancel = mockData.fightResult.cancel
 
+  var lastItem = {};
+  var maxRows = 5;
+  var bacar = []
   
-  var win = winner == 'RED' ? 'LEFT' : 'RIGHT'
-  lastWinning = win
+  bacaratData.forEach(item => {
+    var bacarLength = bacar.length
+    if (!bacarLength) {
+      // initial
+      bacar.push([ item ])
+    } else {
+      if (lastItem.side == item.side) {
 
-  if (!bacarat.length) {
-      bacarat.push([{
-          "badge": `badge-fight-${win.toLowerCase()}`,
-          "no": "1",
-          "side": `${win}`,
-          "border": ""
-      }])
-  } 
+        if (bacarLength == maxRows) {
+          bacar[0].push(item)
+        } else {
+
+          if (!bacar[bacarLength +1]) { //
+
+            bacar.push([item]) // red  
+          } else {
+            bacar[bacarLength + 1].push(item)
+          }
+
+        }
+
+
+      } else {
+        bacar[0].push(item) //blue
+      }
+    }
+
+    lastItem = item
+  })
+
+  console.log(bacar)
+
+  mockData.fightResult.bacarat = bacar
+
+  return mockData.fightResult
+ 
 }
 
 var winner = ''
+
+
 var updateBetsHistory = function() {
+  
+  if (!oldActiveBets.length) {
+    return `<h4 class="text-center py-3">No Bets History</h4>`
+  }
+
 
   var html = ''
-  activeBets.forEach( item => {
+  oldActiveBets.forEach( item => {
     var color = item.side == 'LEFT' ? 'RED' : 'BLUE'
     if (winner == color) {
 
@@ -365,9 +404,15 @@ var updateBetsHistory = function() {
     } );
 </script>
 `
-
 }
 
+var draw = 0
+var cancel = 0
+var wala = 0
+var meron = 0;
+var count = 1;
+var bacaratData = [];
+var standardData = [];
 
 app.post('/update-winner', function(request, response) {
 
@@ -386,6 +431,29 @@ app.post('/update-winner', function(request, response) {
 
   winner = request.body.winner
 
+  var winColor = winner == 'RED' ? 'left' : 'right'
+
+  if (winner == "RED") {
+    meron++
+  } else {
+    wala++
+  }
+
+  bacaratData.push({
+              "badge": `badge-fight-${winColor}`,
+              "no": count,
+              "side": winColor.toUpperCase(),
+              "border": ""
+          })
+
+  activeBets.forEach( item => {
+    item.fight_id = count
+  })
+
+  count++
+
+  oldActiveBets = oldActiveBets.concat(activeBets)
+  updateBetsHistory();
 
   activeBets = []
   mockData.bettingTable = {
@@ -401,7 +469,7 @@ app.post('/update-winner', function(request, response) {
       "result": "OK"
   }
   updateBettingTable();
-  updateBetsHistory(request.body.winner);
+
 
   // // updateFightResults
 
@@ -415,5 +483,4 @@ app.post('/update-winner', function(request, response) {
 
   response.send(JSON.stringify({}))
 })
-
 

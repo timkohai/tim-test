@@ -41,12 +41,31 @@ var playerOther = null;
 var playerMobile = null;
 var mediaServerId = '#mediaServer';
 
-
+// var videoData = [
+//     {
+//         start: 5,
+//         url: 'videos/test-1.mp4',
+//         winner: 'RED',
+//         end: '10',
+//     },
+//     {
+//         start: 7,
+//         url: 'videos/test-2.mp4',
+//         winner: 'BLUE',
+//         end: '15'
+//     },
+//     {
+//         start: 10,
+//         url: 'videos/test-3.mp4',
+//         winner: 'BLUE',
+//         end: '20'
+//     },
+//     ];
 var videoData = [
     {
         url: 'videos/video-1.mp4',
         winner: 'RED',
-        end: '144'
+        end: '144',
     },
     {
         url: 'videos/video-2.mp4',
@@ -166,10 +185,12 @@ function loadDesktopVideo() {
 
                     var seconds = Math.floor(currentTime);
 
+                    var closeBetTime = currentVideoTim.start ? currentVideoTim.start : 110;
+
                     if (seconds % secondsToCallFunction  == 0 && lastSecond !== seconds) {
                         lastSecond = seconds
 
-                        if (seconds == 110) {
+                        if (seconds == closeBetTime) {
                             bettingStatus = 'CLOSED';
                             $(window).trigger('citro-update-event', [{
                             "event":"update-event-16",
