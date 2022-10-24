@@ -26,133 +26,7 @@ app.use(express.static('public'));
 app.post('/');
 app.listen(8080);
 
-
-var mockData = {
-  betsAdd: {
-      "result": "FAILED",
-      "message": "Betting is already closed. No fight is active.",
-      "credits": "100.00"
-  },
-  playerData: {
-      "result": "OK",
-      "player": {
-          "username": "Guest",
-          "currency_display": "USD",
-          "credits": "100.00",
-          "total_bets_today": "0.00",
-          "daily_bet_limit": null
-      },
-      "credits": "100.00",
-      "converted_credits": "100.00",
-      "currency_rate": "1"
-  },
-  fightsData: {
-    "result": "OK",
-    "fight": {
-        "id": 2715,
-        "no": "1",
-        "meron_entry_name": "",
-        "wala_entry_name": "",
-        "betting_status": "OPEN"
-    },
-    "white_rooster": null,
-    "red_rooster": null
-  },
-  eventsData: {
-      "result": "OK",
-      "event": {
-          "id": 13,
-          "created": "2022-10-04T12:13:14-07:00",
-          "modified": "2022-10-05T12:01:19-07:00",
-          "name": "Cockfighting Events",
-          "date_time": "2022-10-06T03:00:00-07:00",
-          "date": "2022-10-06",
-          "time": "2022-10-06T03:00:00-07:00",
-          "status": "LIVE",
-          "arena_id": 1,
-          "media_server_id": 6,
-          "minimum_bet": "5.00",
-          "maximum_bet": "300.00",
-          "minimum_load": "5.00",
-          "first_declaration_start": "2022-10-06T03:00:00-07:00",
-          "last_declaration_end": null,
-          "total_rake": "0.00",
-          "total_surplus": "0",
-          "total_commission": "0.00",
-          "total_commission_surplus": "0",
-          "net_rake": "0.00",
-          "count_meron": 0,
-          "count_wala": 0,
-          "count_draw": 0,
-          "count_cancel": 0,
-          "sum_meron": "0.00",
-          "sum_wala": "0.00",
-          "banner_message": "FIGHTS WITH ODDS BELOW 1.20 WILL BE CANCELLED.",
-          "banner_message_open": "FIGHTS WITH ODDS BELOW 1.20 WILL BE CANCELLED.",
-          "banner_message_close": "FIGHTS WITH ODDS BELOW 1.20 WILL BE CANCELLED.",
-          "banner_message_declaration": "FIGHTS WITH ODDS BELOW 1.20 WILL BE CANCELLED.",
-          "is_bet_migrated": "NO",
-          "is_fight_migrated": "NO",
-          "status_agent_commission": "INACTIVE",
-          "status_event_report": "INACTIVE",
-          "no_fights": "200",
-          "operator_rake": "0.00",
-          "system_rake": "0.00",
-          "content_rake": "0.00",
-          "event_type_id": 2,
-          "eleft_name": "RED",
-          "eright_name": "BLUE",
-          "api_event_token": null,
-          "media_server": {
-              "id": 6,
-              "created": "2022-08-04T08:14:36-07:00",
-              "modified": "2022-08-04T08:14:52-07:00",
-              "name": "defaultpldt",
-              "stream_url": " https://live.cockpitgaming.io/citroftest01/citrofstream02-manifest.m3u8",
-              "status": "ENABLED"
-          }
-      }
-  },
-  fightResult: {
-      "result": "OK",
-      "type": null,
-
-      "bacarat": [
-          [{
-              "badge": "badge-fight-cancel",
-              "no": "1",
-              "side": "CANCEL",
-              "border": ""
-          }]
-      ],
-      "default_data": [
-          [{
-              "badge": "badge-secondary",
-              "no": "1",
-              "side": "CANCEL",
-              "border": ""
-          }]
-      ],
-      "max_col": 10,
-      "max_col_b": 18,
-      "meron": 0,
-      "wala": 0,
-      "cancel": 0,
-      "draw": 0
-  },
-  bettingTable: {
-      "action": "update-bettingTable",
-      "betting_status": "OPEN",
-      "camera_side": "",
-      "meron_odds": "0",
-      "wala_odds": "0",
-      "meron_amount": 0,
-      "wala_amount": 0,
-      "player_meron_amount": 0,
-      "player_wala_amount": 0,
-      "result": "OK"
-  }
-}
+let mockData = require('./public/mock/data.js')
 
 var oldActiveBets = []
 var activeBets = []
@@ -233,8 +107,8 @@ app.post("/fights/data", function (request, response) {
 
 app.post("/fights/fight-results", function (request, response) {
   const data = require('./public/api/fight-results.js');
-  // response.send(JSON.stringify(mockData.fightResult));
-  response.send(JSON.stringify(updateBacarat()));
+  response.send(JSON.stringify(mockData.fightResult));
+  // response.send(JSON.stringify(updateBacarat()));
 });
 
 app.post("/bets/betting-table", function (request, response) {
@@ -283,7 +157,7 @@ app.post("/events/data", function (request, response) {
 });
 
 
-var lastWinning = ''
+// var lastWinning = ''
 var updateBacarat = function(winner) {
   var bacarat = mockData.fightResult.bacarat
   var standard = mockData.fightResult.default_data
@@ -308,9 +182,16 @@ var updateBacarat = function(winner) {
         } else {
 
           if (!bacar[bacarLength +1]) { //
+            if (colCounter > 0) {
+              for (let i = 0; i < colCounter; i++) {
+                bacar[bacarLength + 1].push({})
+              }
+            }
 
             bacar.push([item]) // red  
+
           } else {
+            colCounter++              
             bacar[bacarLength + 1].push(item)
           }
 
@@ -414,6 +295,56 @@ var count = 1;
 var bacaratData = [];
 var standardData = [];
 
+let colCounter = 1;
+let rowCounter = 0;
+let lastWinning = {};
+
+
+let updateBacarat2 = function(bacaratObject) {
+
+    // var bacarat = [
+    //     [{win: 'RED'}, {win: 'BLUE'}],
+    //     [{},{win: 'BLUE'},
+    //     [], 
+    //     [],
+    //     [],
+    //     [],
+    //   ]
+
+
+    let bacaratCount = mockData.fightResult.bacarat[0].length - 1
+
+    if (!Object.keys(lastWinning).length) {
+      mockData.fightResult.bacarat[0].push(bacaratObject);
+    } else {
+      if (lastWinning.side == bacaratObject.side) {
+
+        if (bacaratCount > 0) {
+          for(let i = 0; i < bacaratCount; i++) {
+            mockData.fightResult.bacarat[colCounter].push({})
+          }
+        }
+
+        mockData.fightResult.bacarat[colCounter].push(bacaratObject);
+        // colCounter++
+      } else {
+        mockData.fightResult.bacarat[0].push(bacaratObject);
+      }
+    }
+
+    lastWinning = bacaratObject;
+}
+
+app.use('/reset-demo', function(request, response) {
+  d = require('./public/mock/backup.js')
+  mockData = d
+  activeBets = []
+  oldActiveBets = []
+
+  response.send(JSON.stringify({success: true}))
+})
+
+
 app.post('/update-winner', function(request, response) {
 
   console.log('winner:', request.body.winner)
@@ -438,6 +369,15 @@ app.post('/update-winner', function(request, response) {
   } else {
     wala++
   }
+
+  var bacaratObject = {
+              "badge": `badge-fight-${winColor}`,
+              "no": count,
+              "side": winColor.toUpperCase(),
+              "border": ""
+          }
+
+  updateBacarat2(bacaratObject)
 
   bacaratData.push({
               "badge": `badge-fight-${winColor}`,

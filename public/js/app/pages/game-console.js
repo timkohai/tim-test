@@ -43,23 +43,31 @@ var mediaServerId = '#mediaServer';
 
 // var videoData = [
 //     {
-//         start: 5,
-//         url: 'videos/test-1.mp4',
-//         winner: 'RED',
-//         end: '10',
-//     },
-//     {
-//         start: 7,
-//         url: 'videos/test-2.mp4',
-//         winner: 'BLUE',
-//         end: '15'
-//     },
-//     {
-//         start: 10,
-//         url: 'videos/test-3.mp4',
-//         winner: 'BLUE',
-//         end: '20'
-//     },
+//             start: 5,
+//             url: 'videos/test-1a.mp4',
+//             winner: 'BLUE',
+//             end: '10'
+//         },{
+//             start: 5,
+//             url: 'videos/test-1b.mp4',
+//             winner: 'BLUE',
+//             end: '10'
+//         },{
+//             start: 5,
+//             url: 'videos/test-1c.mp4',
+//             winner: 'RED',
+//             end: '10'
+//         },{
+//             start: 5,
+//             url: 'videos/test-1d.mp4',
+//             winner: 'RED',
+//             end: '10'
+//         },{
+//             start: 5,
+//             url: 'videos/test-1e.mp4',
+//             winner: 'BLUE',
+//             end: '10'
+//         }
 //     ];
 var videoData = [
     {
@@ -215,7 +223,7 @@ function loadDesktopVideo() {
                             "channel":"CPITDAGASTARPROD-betting-channel",
                             "data":{"uid":[25],
                                 "action":"update-credit",
-                                "winner":"RIGHT"}
+                                "winner":currentVideoTim.winner}
                             }])
 
                             $(window).trigger('citro-update-event', [{
